@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:auth0_spa/src/client/auth0_client.dart';
 import 'package:auth0_spa/src/definitions/get_id_token_claims_options.dart';
 import 'package:auth0_spa/src/definitions/get_token_silently_options.dart';
@@ -7,13 +5,10 @@ import 'package:auth0_spa/src/definitions/get_token_with_popup_options.dart';
 import 'package:auth0_spa/src/definitions/get_user_options.dart';
 import 'package:auth0_spa/src/definitions/id_token.dart';
 import 'package:auth0_spa/src/definitions/logout_options.dart';
-import 'package:auth0_spa/src/definitions/popup_config_options.dart';
 import 'package:auth0_spa/src/definitions/popup_login_options.dart';
 import 'package:auth0_spa/src/definitions/redirect_login_options.dart';
 import 'package:auth0_spa/src/definitions/redirect_login_result.dart';
-import 'package:auth0_spa/src/js/utility/console.dart';
 import 'package:auth0_spa/src/js/utility/js_object_bridge.dart';
-import 'package:js/js_util.dart';
 
 import 'utility/js_object_bridge.dart';
 
@@ -36,12 +31,17 @@ class Auth0ClientJs extends Auth0Client {
   }
 
   @override
-  Future<RedirectLoginResult> handleRedirectCallbackWithQuery(String searchQuery) async {
+  Future<Map<String, String>> handleRedirectCallbackWithQuery(String searchQuery, {List<String> appStateKeys = const []}) async {
     if (searchQuery.startsWith("/")) {
       searchQuery = searchQuery.substring(1);
     }
-    var result = await this._jsAuth0Client.invokeAsyncMethod<JsObjectBridge>("handleRedirectCallback", <dynamic>[searchQuery]);
-    return RedirectLoginResult(appState: result.get<dynamic>("appState"));
+    final result = await this._jsAuth0Client.invokeAsyncMethod<JsObjectBridge>("handleRedirectCallback", <dynamic>[searchQuery]);
+    final appState = result.get<JsObjectBridge>("appState");
+    var convertedAppState = <String, String>{};
+    for (String key in appStateKeys) {
+      convertedAppState[key] = appState.get(key);
+    }
+    return convertedAppState;
   }
 
   @override

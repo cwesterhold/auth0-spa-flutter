@@ -58,7 +58,7 @@ String _promptTypeToString(LoginPromptType type) {
       return "select_account";
   }
 
-  throw ArgumentError("Unknown LoginPromptType: ${type}");
+  throw ArgumentError("Unknown LoginPromptType: $type");
 }
 
 String _displayTypeToString(LoginDisplayType type) {
@@ -77,5 +77,5 @@ String _displayTypeToString(LoginDisplayType type) {
       return "wap";
   }
 
-  throw ArgumentError("Unknown LoginDisplayType: ${type}");
+  throw ArgumentError("Unknown LoginDisplayType: $type");
 }
