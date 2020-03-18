@@ -17,7 +17,6 @@ export 'package:auth0_spa/src/definitions/redirect_login_result.dart';
 
 import 'package:auth0_spa/src/client/auth0_client.dart';
 import 'package:auth0_spa/src/definitions/auth0_client_options.dart';
-import 'package:auth0_spa/src/js/_auth0_client_js.dart';
 import 'package:auth0_spa/src/stub/_auth0_js_interop.dart' as js
     if (dart.library.html) 'package:auth0_spa/src/js/_auth0_js_interop.dart';
 
