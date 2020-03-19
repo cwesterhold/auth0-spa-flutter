@@ -4,7 +4,9 @@ class JsUtility {
   static dynamic primitiveMapToJsObject(Map<String, dynamic> map) {
     dynamic jsObject = newObject();
     map.forEach((key, value) {
-      setProperty(jsObject, key, value);
+      if (value != null) {
+        setProperty(jsObject, key, value);
+      }
     });
     return jsObject;
   }
