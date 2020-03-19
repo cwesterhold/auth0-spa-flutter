@@ -1,8 +1,8 @@
-import 'dart:js_util';
-
 import 'package:auth0_spa/src/definitions/base_login_options.dart';
 import 'package:auth0_spa/src/definitions/login_display_type.dart';
 import 'package:auth0_spa/src/definitions/login_prompt_type.dart';
+import 'package:auth0_spa/src/stub/_js_utility.dart'
+  if (dart.library.html) 'package:auth0_spa/src/js/utility/js_utility.dart';
 
 class RedirectLoginOptions extends BaseLoginOptions {
 
@@ -40,17 +40,9 @@ class RedirectLoginOptions extends BaseLoginOptions {
   @override
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = super.toMap();
-    map["appState"] = _serializeAppState();
+    map["appState"] = JsUtility.primitiveMapToJsObject(this.appState);
     map["fragment"] = this.fragment;
     map["redirect_uri"] = this.redirectUri;
     return map;
-  }
-  
-  dynamic _serializeAppState() {
-    dynamic jsObject = newObject();
-    this.appState.forEach((key, value) {
-      setProperty(jsObject, key, value);
-    });
-    return jsObject;
   }
 }

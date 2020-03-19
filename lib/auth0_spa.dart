@@ -17,9 +17,9 @@ export 'package:auth0_spa/src/definitions/redirect_login_result.dart';
 
 import 'package:auth0_spa/src/client/auth0_client.dart';
 import 'package:auth0_spa/src/definitions/auth0_client_options.dart';
-import 'package:auth0_spa/src/stub/_auth0_js_interop.dart' as js
+import 'package:auth0_spa/src/stub/_auth0_js_interop.dart'
     if (dart.library.html) 'package:auth0_spa/src/js/_auth0_js_interop.dart';
 
 class Auth0 {
-  static Future<Auth0Client> create(Auth0ClientOptions options) async => js.createAuth0Client(options);
+  static Future<Auth0Client> create(Auth0ClientOptions options) async => createAuth0Client(options);
 }

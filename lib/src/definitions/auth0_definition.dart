@@ -1,4 +1,5 @@
-import 'package:js/js_util.dart';
+import 'package:auth0_spa/src/stub/_js_utility.dart'
+  if (dart.library.html) 'package:auth0_spa/src/js/utility/js_utility.dart';
 
 abstract class Auth0Definition {
 
@@ -6,14 +7,5 @@ abstract class Auth0Definition {
 
   Map<String, dynamic> toMap();
 
-  dynamic toJsObject() {
-    Map<String, dynamic> map = this.toMap();
-    final dynamic object = newObject();
-    map.forEach((key, dynamic value) {
-      if (value != null) {
-        setProperty(object, key, value);
-      }
-    });
-    return object;
-  }
+  dynamic toJsObject() => JsUtility.primitiveMapToJsObject(this.toMap());
 }
