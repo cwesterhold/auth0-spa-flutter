@@ -52,9 +52,7 @@ class Auth0ClientOptions extends BaseLoginOptions {
     map["issuer"] = this.issuer;
     map["leeway"] = this.leeway?.inSeconds;
     map["redirect_uri"] = this.redirectUri;
-
-    if (this.useRefreshTokens != null)
-      map["useRefreshTokens"] = this.useRefreshTokens;
+    map["useRefreshTokens"] = this.useRefreshTokens;
 
     return map;
   }
