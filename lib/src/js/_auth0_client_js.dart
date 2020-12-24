@@ -55,9 +55,12 @@ class Auth0ClientJs extends Auth0Client {
       final result = await this._jsAuth0Client.invokeAsyncMethod<String>("getTokenSilently", <dynamic>[options?.toJsObject()]);
       return result;
     } catch (e) {
-      // Native code wasn't able to generate token.
-      // Most likely refresh token is expired.
-      return null;
+      if (e.error != null && e.error == "login_required") {
+        // Native code wasn't able to generate token.
+        // Most likely refresh token is expired.
+        return null;
+      }
+      rethrow;
     }
   }
 
