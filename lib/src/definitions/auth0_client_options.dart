@@ -10,6 +10,7 @@ class Auth0ClientOptions extends BaseLoginOptions {
   final String issuer;
   final Duration leeway;
   final String redirectUri;
+  final bool useRefreshTokens;
 
   const Auth0ClientOptions({
     this.authorizeTimeout,
@@ -18,6 +19,7 @@ class Auth0ClientOptions extends BaseLoginOptions {
     this.issuer,
     this.leeway,
     this.redirectUri,
+    this.useRefreshTokens,
     String acrValues,
     String audience,
     String connection,
@@ -50,6 +52,8 @@ class Auth0ClientOptions extends BaseLoginOptions {
     map["issuer"] = this.issuer;
     map["leeway"] = this.leeway?.inSeconds;
     map["redirect_uri"] = this.redirectUri;
+    map["useRefreshTokens"] = this.useRefreshTokens;
+
     return map;
   }
 }
