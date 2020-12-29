@@ -9,11 +9,13 @@ class RedirectLoginOptions extends BaseLoginOptions {
   final Map<String, String> appState;
   final String fragment;
   final String redirectUri;
+  final Map<String, String> customParams;
 
   const RedirectLoginOptions({
     this.appState = const {},
     this.fragment,
     this.redirectUri,
+    this.customParams,
     String acrValues,
     String audience,
     String connection,
@@ -43,6 +45,7 @@ class RedirectLoginOptions extends BaseLoginOptions {
     map["appState"] = JsUtility.primitiveMapToJsObject(this.appState);
     map["fragment"] = this.fragment;
     map["redirect_uri"] = this.redirectUri;
+    map.addAll(this.customParams ?? const {});
     return map;
   }
 }
